@@ -1,0 +1,15 @@
+version: '3.0'
+services:
+    localstack:
+        image: localstack/localstack-pro:latest
+        environment:
+            - AWS_DEFAULT_REGION=us-east-1
+            - LAMBDA_IGNORE_ARCHITECTURE=1
+            - LOCALSTACK_API_KEY=${LOCALSTACK_API_KEY- }
+            - DOCKER_HOST=unix:///var/run/docker.sock
+        ports:
+            - '4566-4597:4566-4597'
+            - '4510-4520:4510-4520'
+        volumes:
+            - '${TMPDIR:-/tmp/localstack}:/var/lib/localstack'
+            - '/var/run/docker.sock:/var/run/docker.sock'
